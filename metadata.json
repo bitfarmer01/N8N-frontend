@@ -1,0 +1,5 @@
+{
+  "name": "React Tailwind Vite Starter",
+  "description": "A modern, deployable starter template for building React applications with TypeScript, Tailwind CSS, and Vite. It features a clean project structure, reusable components, and best practices for a great developer experience.",
+  "requestFramePermissions": []
+}
