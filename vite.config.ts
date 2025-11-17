@@ -1,23 +1,22 @@
-import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, '.', '');
-    return {
-      server: {
-        port: 3000,
-        host: '0.0.0.0',
-      },
-      plugins: [react()],
-      define: {
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
-      },
-      resolve: {
-        alias: {
-          '@': path.resolve(__dirname, '.'),
-        }
-      }
-    };
+/**
+ * Vite Configuration
+ * @see https://vitejs.dev/config/
+ */
+export default defineConfig({
+  plugins: [
+    // Enables React support, including JSX transformation and Fast Refresh.
+    react()
+  ],
+  
+  /**
+   * The `base` option is crucial for correct deployment.
+   * By default, Vite uses absolute paths ('/'). For hosting on GitHub Pages
+   * in a repository (e.g., `user.github.io/repo-name`), paths need to be relative.
+   * Setting `base: './'` ensures that all asset links (JS, CSS) are generated
+   * relative to the `index.html` file, making the built application portable.
+   */
+  base: './',
 });

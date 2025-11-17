@@ -1,26 +1,17 @@
-
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Card from './components/Card';
 import Button from './components/Button';
-
-// Icon components defined outside App to prevent re-creation on re-renders for performance.
-const CodeIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-  </svg>
-);
-
-const RocketIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-    </svg>
-);
-
+import CodeIcon from './components/icons/CodeIcon';
+import RocketIcon from './components/icons/RocketIcon';
 
 function App() {
   const [count, setCount] = useState(0);
+
+  const handleIncrement = useCallback(() => {
+    setCount(prevCount => prevCount + 1);
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen font-sans bg-gray-900 text-gray-100">
@@ -44,7 +35,7 @@ function App() {
             </p>
             <div className="flex items-center justify-center space-x-6 p-4 bg-gray-900/50 rounded-lg">
               <span className="text-3xl font-mono font-bold text-white w-16 text-center">{count}</span>
-              <Button onClick={() => setCount(count + 1)}>
+              <Button onClick={handleIncrement}>
                 Increment
               </Button>
             </div>
